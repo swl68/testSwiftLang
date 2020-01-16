@@ -8,8 +8,6 @@
 
 import UIKit
 
-fileprivate let imageCache = NSCache<NSString, UIImage>()
-
 class DetailTableViewCell: UITableViewCell, UICollectionViewDelegateFlowLayout {
     
     static let detailCell = "detailTableViewCell"
@@ -19,15 +17,13 @@ class DetailTableViewCell: UITableViewCell, UICollectionViewDelegateFlowLayout {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         layout.scrollDirection = UICollectionView.ScrollDirection.horizontal
-        layout.minimumLineSpacing = 0
-       // layout.itemSize = CGSize(width: 320.0, height: 480.0)
         
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = .red
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.collectionViewLayout = layout
         collectionView.isPagingEnabled = true
         
-        collectionView.register(DetailPhotoCollectionViewCell.self, forCellWithReuseIdentifier: DetailPhotoCollectionViewCell.galeriCell)
+        collectionView.register(DetailPhotoCollectionViewCell.self, forCellWithReuseIdentifier: DetailPhotoCollectionViewCell.galeriCell2)
         addSubview(collectionView)
         setupConstraints()
     }
@@ -43,12 +39,13 @@ class DetailTableViewCell: UITableViewCell, UICollectionViewDelegateFlowLayout {
         collectionView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
     }
     
-    func setCollectionViewDataSourceDelegate(dataSourceDelegate: UICollectionViewDataSource & UICollectionViewDelegate, for row: Int, itemSize: CGSize) {
-        
-        layout.itemSize = itemSize
-        collectionView.collectionViewLayout = layout
+    func setCollectionViewDataSourceDelegate(dataSourceDelegate: UICollectionViewDataSource & UICollectionViewDelegate, for row: Int) {
         collectionView.delegate = dataSourceDelegate
         collectionView.dataSource = dataSourceDelegate
+        
+        layout.itemSize = CGSize(width: frame.width, height: 480.0)
+        collectionView.collectionViewLayout = layout
+        
         collectionView.tag = row
         collectionView.reloadData()
     }

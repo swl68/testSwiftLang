@@ -43,7 +43,7 @@ class MainCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .white
+        layer.cornerRadius = 5
         setupElements()
         setupConstraints()
     }

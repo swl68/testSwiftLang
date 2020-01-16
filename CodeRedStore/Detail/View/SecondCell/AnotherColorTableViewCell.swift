@@ -8,26 +8,21 @@
 
 import UIKit
 
-fileprivate let imageCache = NSCache<NSString, UIImage>()
-
-class DetailTableViewCell: UITableViewCell, UICollectionViewDelegateFlowLayout {
+class AnotherColorTableViewCell: UITableViewCell, UICollectionViewDelegateFlowLayout {
     
-    static let detailCell = "detailTableViewCell"
+    static let detailCell = "anotherColorTableViewCell"
     private var layout = UICollectionViewFlowLayout()
     private var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         layout.scrollDirection = UICollectionView.ScrollDirection.horizontal
-        layout.minimumLineSpacing = 0
-        layout.itemSize = CGSize(width: 320.0, height: 480.0)
         
         collectionView.backgroundColor = .white
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.collectionViewLayout = layout
-        collectionView.isPagingEnabled = true
         
-        collectionView.register(DetailPhotoCollectionViewCell.self, forCellWithReuseIdentifier: DetailPhotoCollectionViewCell.galeriCell)
+        collectionView.register(DetailSizeCollectionViewCell.self, forCellWithReuseIdentifier: DetailSizeCollectionViewCell.galeriCell)
         addSubview(collectionView)
         setupConstraints()
     }
@@ -46,6 +41,10 @@ class DetailTableViewCell: UITableViewCell, UICollectionViewDelegateFlowLayout {
     func setCollectionViewDataSourceDelegate(dataSourceDelegate: UICollectionViewDataSource & UICollectionViewDelegate, for row: Int) {
         collectionView.delegate = dataSourceDelegate
         collectionView.dataSource = dataSourceDelegate
+        
+        layout.itemSize = CGSize(width: 56, height: 56)
+        collectionView.collectionViewLayout = layout
+        
         collectionView.tag = row
         collectionView.reloadData()
     }

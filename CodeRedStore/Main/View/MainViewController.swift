@@ -16,7 +16,6 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.delegate = self
-        
         setupCollectionView()
         setupConstraints()
     }
@@ -34,6 +33,9 @@ class MainViewController: UIViewController {
         myCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
     
+    deinit {
+        print("deinit main")
+    }
     
 }
 
@@ -46,8 +48,7 @@ extension MainViewController: MainViewPresenterDelegate {
     }
     
     func showError(error: String) {
-        // show alert
-        print(error)
+        showAlert("Error", error)
     }
     
 }
@@ -56,6 +57,7 @@ extension MainViewController: MainViewPresenterDelegate {
 extension MainViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print("number of row in sections")
         return presenter.getDataSourceCount()
     }
     
@@ -72,8 +74,16 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if indexPath.row == presenter.getDataSourceCount() - 4 &&  presenter.getNextPage() > 1 {
+        if indexPath.row == presenter.getDataSourceCount() - 5 &&  presenter.getNextPage() > 1 {
             presenter.loadMore()
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let detailUrl = presenter.getItem(index: indexPath.row).detailURL else { return }
+        let detailViewController = DetailViewController()
+        let detailViewPresenter = DetailViewPresenter(view: detailViewController, detailUrlStr: detailUrl)
+        detailViewController.presenter = detailViewPresenter
+        navigationController?.pushViewController(detailViewController, animated: true)
     }
 }

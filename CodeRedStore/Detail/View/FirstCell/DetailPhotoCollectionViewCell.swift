@@ -13,17 +13,19 @@ fileprivate let imageCache = NSCache<NSString, UIImage>()
 
 class DetailPhotoCollectionViewCell: UICollectionViewCell {
     
-    static let galeriCell = "AdvertCollectionViewCell"
+    static let galeriCell2 = "advertCollectionViewCell"
     
     let myImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .white
+        imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        backgroundColor = .green
         addSubview(myImageView)
         setupConstraints()
     }
@@ -33,9 +35,14 @@ class DetailPhotoCollectionViewCell: UICollectionViewCell {
     }
     
     func setupConstraints() {
-        myImageView.heightAnchor.constraint(equalToConstant: 480).isActive = true
-        myImageView.widthAnchor.constraint(equalToConstant: 320).isActive = true
+//        myImageView.heightAnchor.constraint(equalToConstant: 480).isActive = true
+//        myImageView.widthAnchor.constraint(equalToConstant: 320).isActive = true
         myImageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        myImageView.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
+        myImageView.leftAnchor.constraint(equalTo: leftAnchor, constant: 10).isActive = true
+        myImageView.rightAnchor.constraint(equalTo: rightAnchor, constant: -10).isActive = true
+        myImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10).isActive = true
+        
     }
     
     func loadImage(imgStr: String) {

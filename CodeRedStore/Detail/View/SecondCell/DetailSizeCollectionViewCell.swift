@@ -13,11 +13,11 @@ fileprivate let imageCache = NSCache<NSString, UIImage>()
 
 class DetailSizeCollectionViewCell: UICollectionViewCell {
     
-    static let galeriCell = "SizeCollectionViewCell"
+    static let galeriCell = "sizeCollectionViewCell"
     
     let myImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .green
+        //imageView.contentMode = .scaleAspectFit
         //imageView.image = UIImage(named: "placeholder.png")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -25,6 +25,7 @@ class DetailSizeCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.translatesAutoresizingMaskIntoConstraints = false
         addSubview(myImageView)
         setupConstraints()
     }
@@ -34,9 +35,9 @@ class DetailSizeCollectionViewCell: UICollectionViewCell {
     }
     
     func setupConstraints() {
-        myImageView.heightAnchor.constraint(equalToConstant: 56).isActive = true
-        myImageView.widthAnchor.constraint(equalToConstant: 56).isActive = true
-        //myImageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        myImageView.heightAnchor.constraint(equalToConstant: 46).isActive = true
+        myImageView.widthAnchor.constraint(equalToConstant: 46).isActive = true
+        myImageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
     }
     
     func loadImage(imgStr: String) {

@@ -19,9 +19,34 @@ class NetworkManager {
     private init() {}
     let networkRequest = NetworkRequest.shared
     
-    func getClothes(with parametrs: String, completion: @escaping(Result<Items>) -> () ) {
+    func getClothes(from urlStr: String, with parametrs: String, completion: @escaping(Result<Items>) -> () ) {
         
-        networkRequest.request(with: parametrs) { (resultRequest) in
+        guard let url = URL(string: urlStr) else { return }
+        
+        networkRequest.request(from: url, with: parametrs) { (resultRequest) in
+
+            if resultRequest.error != nil {
+                guard let err = resultRequest.error?.localizedDescription else { return }
+                completion(Result.failed(err))
+            } else {
+                guard let rowData = resultRequest.data else { return }
+                do {
+                    let decodableData = try JSONDecoder().decode(Main.self, from: rowData)
+                    guard let items = decodableData.data?.items else { return }
+                    
+                    completion(Result.success(items) )
+                } catch {
+                    completion(Result.failed("Ошибка декодирования, сообщите администратору"))
+                }
+            }
+        }
+    }
+    
+    func getDetailClothes(from urlStr: String, with parametrs: String, completion: @escaping(Result<DetailItem>) -> () ) {
+        
+        guard let url = URL(string: urlStr) else { return }
+        
+        networkRequest.request(from: url, with: parametrs) { (resultRequest) in
             
             if resultRequest.error != nil {
                 guard let err = resultRequest.error?.localizedDescription else { return }
@@ -30,12 +55,14 @@ class NetworkManager {
                 guard let rowData = resultRequest.data else { return }
                 do {
                     let decodableData = try JSONDecoder().decode(Main.self, from: rowData)
-                    guard let items = decodableData.data else { return }
-                    completion(Result.success(items) )
+                    guard let item = decodableData.data?.detailItem else { return }
+                    
+                    completion(Result.success(item) )
                 } catch {
                     completion(Result.failed("Ошибка декодирования, сообщите администратору"))
                 }
             }
         }
     }
+    
 }

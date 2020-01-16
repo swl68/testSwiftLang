@@ -6,4 +6,15 @@
 //  Copyright © 2019 denisok. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+extension UIViewController {
+    
+    func showAlert(_ title: String, _ message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: title, style: .cancel, handler: nil)
+        alertController.addAction(action)
+        present(alertController, animated: true)
+    }
+    
+}

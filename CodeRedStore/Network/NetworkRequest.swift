@@ -14,7 +14,7 @@ class NetworkRequest {
     private init() {}
     typealias resultRequest = (data: Data?, response: URLResponse?, error: Error?)
     
-    private func createRequest(for url: URL, with parameters: String) -> URLRequest {
+    private func createRequest(from url: URL, with parameters: String) -> URLRequest {
         guard let postData = parameters.data(using: .utf8) else { return URLRequest(url: url) }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -22,9 +22,9 @@ class NetworkRequest {
         return request
     }
     
-    func request(with parameters: String, completion: @escaping (resultRequest) -> () ) {
-        guard let url = URL(string: Endpoint.url) else { return }
-        let request = createRequest(for: url, with: parameters)
+    func request(from url: URL, with parameters: String, completion: @escaping (resultRequest) -> () ) {
+        //guard let url = URL(string: Endpoint.url) else { return }
+        let request = createRequest(from: url, with: parameters)
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             let httpResponse = response as? HTTPURLResponse
             completion((data, httpResponse, error))

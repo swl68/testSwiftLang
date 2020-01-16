@@ -8,15 +8,10 @@
 
 import Foundation
 
-protocol MainViewControllerModelDelegate: class {
-    func dataChanged()
-    func showError(error: String)
-}
-
-class MainViewControllerModel {
+struct MainViewControllerModel {
     
-    weak var delegate: MainViewControllerModelDelegate?
-    private var dataSource: [Item] = []
-    
+    var dataSource: [Item] = []
+    var nextPage: Int
+    var isEmptyPage: Bool
     
 }

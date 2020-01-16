@@ -9,22 +9,37 @@
 import Foundation
 
 // MARK: - Main
-struct Main: Codable {
+struct Main: Decodable {
     let success: Bool?
     let outputScenario: String?
-    let data: Items?
+    let data: Output?
     let stateToken: String?
     let cookies: [Cooky]?
 }
 
+struct Output: Decodable {
+    var detailItem: DetailItem?
+    var items: Items?
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        do {
+            items = try container.decode(Items.self)
+        } catch {
+            detailItem = try container.decode(DetailItem.self)
+        }
+    }
+}
+
+
 // MARK: - Items
-struct Items: Codable {
+struct Items: Decodable {
     let items: [Item]
     let nextPage: Int?
 }
 
 // MARK: - Item
-struct Item: Codable {
+struct Item: Decodable {
     let size: [String]?
     let imgURL: String?
     let itemDescription, coast, detailURL: String?
@@ -37,6 +52,24 @@ struct Item: Codable {
         case coast
         case detailURL = "detailUrl"
         case brand
+    }
+}
+
+// MARK: - DetailItem
+struct DetailItem: Decodable {
+    let anotherColorUrls: [String]?
+    let imgURLArray, imgURLAnotherColor: [String]?
+    let size: [String]?
+    let name, brand, coast: String?
+    let dataDescription: String
+
+    enum CodingKeys: String, CodingKey {
+        case anotherColorUrls
+        case imgURLArray = "imgUrlArray"
+        case imgURLAnotherColor = "imgUrlAnotherColor"
+        case size
+        case dataDescription = "description"
+        case name, brand, coast
     }
 }
 
@@ -60,9 +93,11 @@ struct Item: Codable {
 //}
 
 // MARK: - Cooky
-struct Cooky: Codable {
-    let key, value, domain, path: String
-    let hostOnly: Bool
-    let creation, lastAccessed: String
+struct Cooky: Decodable {
+    let key, value, domain, path: String?
+    let hostOnly: Bool?
+    let creation, lastAccessed: String?
+    let expires: String?
+    let maxAge: Int?
 }
 
