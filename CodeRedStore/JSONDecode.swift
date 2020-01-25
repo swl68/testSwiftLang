@@ -60,7 +60,7 @@ struct DetailItem: Decodable {
     let anotherColorUrls: [String]?
     let imgURLArray, imgURLAnotherColor: [String]?
     let size: [String]?
-    let name, brand, coast: String?
+    let name, brand, coast: String
     let dataDescription: String
 
     enum CodingKeys: String, CodingKey {

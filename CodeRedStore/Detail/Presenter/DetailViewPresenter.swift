@@ -27,7 +27,6 @@ class DetailViewPresenter: DetailViewPresenterProtocol {
     weak var view: DetailViewProtocol?
     var detailUrlStr: String
     var networkManager = NetworkManager.shared
-    var description: String?
     
     var items : [CellModelItem] = []
        
@@ -44,6 +43,7 @@ class DetailViewPresenter: DetailViewPresenterProtocol {
     private func prepareModel(model: DetailItem) {
         appendPhotoModel(model: model)
         appendAnotherModel(model: model)
+        appendDescriptionModel(model: model)
     }
     
     private func appendAnotherModel(model: DetailItem) {
@@ -58,6 +58,11 @@ class DetailViewPresenter: DetailViewPresenterProtocol {
             let phtItem = PhotoModel(photoItems: img)
             items.append(phtItem)
         }
+    }
+    
+    private func appendDescriptionModel(model: DetailItem) {
+        let descriptionItem = DescriptionModel(description: model.dataDescription, name: model.name, brand: model.brand, coast: model.coast)
+        items.append(descriptionItem)
     }
     
     func getDetail() {

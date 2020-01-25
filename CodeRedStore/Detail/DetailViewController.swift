@@ -17,7 +17,6 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         setupTableView()
         setupConstraint()
-        print("dfdf")
     }
     
     func setupTableView() {
@@ -28,6 +27,7 @@ class DetailViewController: UIViewController {
         tableView.backgroundColor = .white
         tableView.register(DetailTableViewCell.self, forCellReuseIdentifier: DetailTableViewCell.detailCell)
         tableView.register(AnotherColorTableViewCell.self, forCellReuseIdentifier: AnotherColorTableViewCell.detailCell)
+        tableView.register(DescriptionTableViewCell.self, forCellReuseIdentifier: DescriptionTableViewCell.descriptionCell)
         view.addSubview(tableView)
     }
     
@@ -39,7 +39,7 @@ class DetailViewController: UIViewController {
     }
     
     deinit {
-        print("deinit detail")
+        print("deinit detailVC")
     }
 }
 
@@ -77,6 +77,13 @@ extension DetailViewController: UITableViewDataSource {
                 return anotherCell
             }
             
+        case .description:
+            print("tableviewcell description")
+            if let descriptionItem = item as? DescriptionModel, let descriptionCell = tableView.dequeueReusableCell(withIdentifier: DescriptionTableViewCell.descriptionCell, for: indexPath) as? DescriptionTableViewCell {
+                descriptionCell.configureCell(item: descriptionItem)
+                return descriptionCell
+            }
+            
         default:
             break
         }
@@ -84,13 +91,15 @@ extension DetailViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
+
         let item = presenter?.getItems()[indexPath.row]
         switch item?.type {
         case .detail:
             return 480
         case .another:
             return 80
+        case .description:
+            return UITableView.automaticDimension
         default:
             return UITableView.automaticDimension
         }

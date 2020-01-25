@@ -12,6 +12,7 @@ import UIKit
 enum CellModelType {
     case detail
     case another
+    case description
 }
 
 protocol CellModelItem {
@@ -36,7 +37,7 @@ class PhotoModel: CellModelItem {
     }
     
     var sectionTitle: String {
-        return "Detail info"
+        return ""
     }
     
     var rowItem: Int {
@@ -57,7 +58,7 @@ class AnotherModel: CellModelItem {
     }
     
     var sectionTitle: String {
-        return "Another color"
+        return "Другие цвета"
     }
     
     var rowItem: Int {
@@ -68,3 +69,26 @@ class AnotherModel: CellModelItem {
         self.anotherItems = anotherItems
     }
 }
+
+class DescriptionModel: CellModelItem {
+    var description: String
+    var name: String
+    var brand: String
+    var coast: String
+    
+    var type: CellModelType {
+        return .description
+    }
+    
+    var sectionTitle: String {
+        return "Описание"
+    }
+    
+    init(description: String, name: String, brand: String, coast: String) {
+        self.description = description
+        self.name = name
+        self.brand = brand
+        self.coast = coast
+    }
+}
+

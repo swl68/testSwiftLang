@@ -43,7 +43,7 @@ class DetailTableViewCell: UITableViewCell, UICollectionViewDelegateFlowLayout {
         collectionView.delegate = dataSourceDelegate
         collectionView.dataSource = dataSourceDelegate
         
-        layout.itemSize = CGSize(width: frame.width, height: 480.0)
+        layout.itemSize = CGSize(width: self.frame.width, height: self.frame.height)// 480.0)
         collectionView.collectionViewLayout = layout
         
         collectionView.tag = row

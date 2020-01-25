@@ -19,7 +19,7 @@ class MainViewPresenter {
     private let networkManager = NetworkManager.shared
     weak var delegate: MainViewPresenterDelegate?
     
-    var typeKey = "sumki"//"bryuki" //"sumki" //"shapki"
+    var typeKey = "shapki"// "bryuki" //"sumki"
     
     init() {
         updateDataSource()
