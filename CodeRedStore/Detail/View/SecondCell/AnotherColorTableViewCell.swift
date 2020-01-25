@@ -42,7 +42,7 @@ class AnotherColorTableViewCell: UITableViewCell, UICollectionViewDelegateFlowLa
         collectionView.delegate = dataSourceDelegate
         collectionView.dataSource = dataSourceDelegate
         
-        layout.itemSize = CGSize(width: 56, height: 56)
+        layout.itemSize = CGSize(width: 46, height: 46)
         collectionView.collectionViewLayout = layout
         
         collectionView.tag = row

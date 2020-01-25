@@ -17,6 +17,7 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         setupTableView()
         setupConstraint()
+        print("dfdf")
     }
     
     func setupTableView() {
@@ -94,14 +95,6 @@ extension DetailViewController: UITableViewDataSource {
             return UITableView.automaticDimension
         }
     }
-    
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        return UIView()
-//    }
-//    
-//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-//        return UIView()
-//    }
     
 }
 

@@ -17,7 +17,7 @@ class DetailPhotoCollectionViewCell: UICollectionViewCell {
     
     let myImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .white
+        imageView.backgroundColor = .lightGray
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -25,7 +25,7 @@ class DetailPhotoCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .green
+        backgroundColor = .lightGray
         addSubview(myImageView)
         setupConstraints()
     }
@@ -38,10 +38,10 @@ class DetailPhotoCollectionViewCell: UICollectionViewCell {
 //        myImageView.heightAnchor.constraint(equalToConstant: 480).isActive = true
 //        myImageView.widthAnchor.constraint(equalToConstant: 320).isActive = true
         myImageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        myImageView.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
+        myImageView.topAnchor.constraint(equalTo: topAnchor, constant: 15).isActive = true
         myImageView.leftAnchor.constraint(equalTo: leftAnchor, constant: 10).isActive = true
         myImageView.rightAnchor.constraint(equalTo: rightAnchor, constant: -10).isActive = true
-        myImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10).isActive = true
+        myImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15).isActive = true
         
     }
     

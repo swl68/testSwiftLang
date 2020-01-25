@@ -17,7 +17,7 @@ class DetailSizeCollectionViewCell: UICollectionViewCell {
     
     let myImageView: UIImageView = {
         let imageView = UIImageView()
-        //imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFit
         //imageView.image = UIImage(named: "placeholder.png")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -35,8 +35,14 @@ class DetailSizeCollectionViewCell: UICollectionViewCell {
     }
     
     func setupConstraints() {
-        myImageView.heightAnchor.constraint(equalToConstant: 46).isActive = true
-        myImageView.widthAnchor.constraint(equalToConstant: 46).isActive = true
+        
+        myImageView.topAnchor.constraint(equalTo: topAnchor, constant: 5).isActive = true
+        myImageView.leftAnchor.constraint(equalTo: leftAnchor, constant: 5).isActive = true
+        myImageView.rightAnchor.constraint(equalTo: rightAnchor, constant: -5).isActive = true
+        myImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5).isActive = true
+        
+//        myImageView.heightAnchor.constraint(equalToConstant: 56).isActive = true
+//        myImageView.widthAnchor.constraint(equalToConstant: 56).isActive = true
         myImageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
     }
     
@@ -47,7 +53,6 @@ class DetailSizeCollectionViewCell: UICollectionViewCell {
         if let cacheImage = imageCache.object(forKey: url.absoluteString as NSString) {
             self.myImageView.image = cacheImage
         } else {
-        
             DispatchQueue.global(qos: .background).async {
                 
                 guard let loadData = try? Data(contentsOf: url) else { return }

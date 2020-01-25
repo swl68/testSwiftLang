@@ -42,17 +42,22 @@ class DetailViewPresenter: DetailViewPresenterProtocol {
     }
     
     private func prepareModel(model: DetailItem) {
-      
-        if let img = model.imgURLArray {
-            let phtItem = PhotoModel(photoItems: img)
-            items.append(phtItem)
-        }
-        
+        appendPhotoModel(model: model)
+        appendAnotherModel(model: model)
+    }
+    
+    private func appendAnotherModel(model: DetailItem) {
         if let another = model.imgURLAnotherColor {
             let anotherItm = AnotherModel(anotherItems: another)
             items.append(anotherItm)
         }
-        
+    }
+    
+    private func appendPhotoModel(model: DetailItem) {
+        if let img = model.imgURLArray {
+            let phtItem = PhotoModel(photoItems: img)
+            items.append(phtItem)
+        }
     }
     
     func getDetail() {

@@ -18,7 +18,7 @@ class DetailTableViewCell: UITableViewCell, UICollectionViewDelegateFlowLayout {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         layout.scrollDirection = UICollectionView.ScrollDirection.horizontal
         
-        collectionView.backgroundColor = .red
+        collectionView.backgroundColor = .lightGray
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.collectionViewLayout = layout
         collectionView.isPagingEnabled = true
