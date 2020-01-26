@@ -25,9 +25,9 @@ class DetailViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
         tableView.backgroundColor = .white
-        tableView.register(DetailTableViewCell.self, forCellReuseIdentifier: DetailTableViewCell.detailCell)
-        tableView.register(AnotherColorTableViewCell.self, forCellReuseIdentifier: AnotherColorTableViewCell.detailCell)
-        tableView.register(DescriptionTableViewCell.self, forCellReuseIdentifier: DescriptionTableViewCell.descriptionCell)
+        tableView.register(DetailTableViewCell.self, forCellReuseIdentifier: DetailTableViewCell.id)
+        tableView.register(AnotherColorTableViewCell.self, forCellReuseIdentifier: AnotherColorTableViewCell.id)
+        tableView.register(DescriptionTableViewCell.self, forCellReuseIdentifier: DescriptionTableViewCell.id)
         view.addSubview(tableView)
     }
     
@@ -66,20 +66,17 @@ extension DetailViewController: UITableViewDataSource {
         switch item?.type {
             
         case .detail:
-            print("tableviewcell detail")
-            if let detailCell = tableView.dequeueReusableCell(withIdentifier: DetailTableViewCell.detailCell, for: indexPath) as? DetailTableViewCell {
+            if let detailCell = tableView.dequeueReusableCell(withIdentifier: DetailTableViewCell.id, for: indexPath) as? DetailTableViewCell {
                 return detailCell
             }
             
         case .another:
-            print("tableviewcell another")
-            if let anotherCell = tableView.dequeueReusableCell(withIdentifier: AnotherColorTableViewCell.detailCell, for: indexPath) as? AnotherColorTableViewCell {
+            if let anotherCell = tableView.dequeueReusableCell(withIdentifier: AnotherColorTableViewCell.id, for: indexPath) as? AnotherColorTableViewCell {
                 return anotherCell
             }
             
         case .description:
-            print("tableviewcell description")
-            if let descriptionItem = item as? DescriptionModel, let descriptionCell = tableView.dequeueReusableCell(withIdentifier: DescriptionTableViewCell.descriptionCell, for: indexPath) as? DescriptionTableViewCell {
+            if let descriptionItem = item as? DescriptionModel, let descriptionCell = tableView.dequeueReusableCell(withIdentifier: DescriptionTableViewCell.id, for: indexPath) as? DescriptionTableViewCell {
                 descriptionCell.configureCell(item: descriptionItem)
                 return descriptionCell
             }
@@ -139,7 +136,7 @@ extension DetailViewController: UICollectionViewDataSource {
         switch item?.type {
         case .detail:
             
-            if let item = item as? PhotoModel, let detailCell = collectionView.dequeueReusableCell(withReuseIdentifier: DetailPhotoCollectionViewCell.galeriCell2, for: indexPath) as? DetailPhotoCollectionViewCell {
+            if let item = item as? PhotoModel, let detailCell = collectionView.dequeueReusableCell(withReuseIdentifier: DetailPhotoCollectionViewCell.id, for: indexPath) as? DetailPhotoCollectionViewCell {
                 let photoStr = item.photoItems[indexPath.section]
                 detailCell.loadImage(imgStr: photoStr)
                 return detailCell
@@ -147,7 +144,7 @@ extension DetailViewController: UICollectionViewDataSource {
             
         case .another:
             
-            if let item = item as? AnotherModel, let anotherCell = collectionView.dequeueReusableCell(withReuseIdentifier: DetailSizeCollectionViewCell.galeriCell, for: indexPath) as? DetailSizeCollectionViewCell {
+            if let item = item as? AnotherModel, let anotherCell = collectionView.dequeueReusableCell(withReuseIdentifier: DetailSizeCollectionViewCell.id, for: indexPath) as? DetailSizeCollectionViewCell {
                 let anotherStr = item.anotherItems[indexPath.section]
                 anotherCell.loadImage(imgStr: anotherStr)
                 

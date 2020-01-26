@@ -9,8 +9,8 @@
 import UIKit
 
 class AnotherColorTableViewCell: UITableViewCell, UICollectionViewDelegateFlowLayout {
+    static let id = String(describing: AnotherColorTableViewCell.self)
     
-    static let detailCell = "anotherColorTableViewCell"
     private var layout = UICollectionViewFlowLayout()
     private var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         
@@ -22,7 +22,7 @@ class AnotherColorTableViewCell: UITableViewCell, UICollectionViewDelegateFlowLa
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.collectionViewLayout = layout
         
-        collectionView.register(DetailSizeCollectionViewCell.self, forCellWithReuseIdentifier: DetailSizeCollectionViewCell.galeriCell)
+        collectionView.register(DetailSizeCollectionViewCell.self, forCellWithReuseIdentifier: DetailSizeCollectionViewCell.id)
         addSubview(collectionView)
         setupConstraints()
     }

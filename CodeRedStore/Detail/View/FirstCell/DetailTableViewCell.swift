@@ -9,8 +9,8 @@
 import UIKit
 
 class DetailTableViewCell: UITableViewCell, UICollectionViewDelegateFlowLayout {
+    static let id = String(describing: DetailTableViewCell.self)
     
-    static let detailCell = "detailTableViewCell"
     private var layout = UICollectionViewFlowLayout()
     private var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         
@@ -23,7 +23,7 @@ class DetailTableViewCell: UITableViewCell, UICollectionViewDelegateFlowLayout {
         collectionView.collectionViewLayout = layout
         collectionView.isPagingEnabled = true
         
-        collectionView.register(DetailPhotoCollectionViewCell.self, forCellWithReuseIdentifier: DetailPhotoCollectionViewCell.galeriCell2)
+        collectionView.register(DetailPhotoCollectionViewCell.self, forCellWithReuseIdentifier: DetailPhotoCollectionViewCell.id)
         addSubview(collectionView)
         setupConstraints()
     }
@@ -43,9 +43,8 @@ class DetailTableViewCell: UITableViewCell, UICollectionViewDelegateFlowLayout {
         collectionView.delegate = dataSourceDelegate
         collectionView.dataSource = dataSourceDelegate
         
-        layout.itemSize = CGSize(width: self.frame.width, height: self.frame.height)// 480.0)
+        layout.itemSize = CGSize(width: self.frame.width, height: self.frame.height)
         collectionView.collectionViewLayout = layout
-        
         collectionView.tag = row
         collectionView.reloadData()
     }

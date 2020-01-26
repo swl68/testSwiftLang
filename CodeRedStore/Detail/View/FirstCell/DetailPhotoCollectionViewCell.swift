@@ -12,8 +12,7 @@ import UIKit
 fileprivate let imageCache = NSCache<NSString, UIImage>()
 
 class DetailPhotoCollectionViewCell: UICollectionViewCell {
-    
-    static let galeriCell2 = "advertCollectionViewCell"
+    static let id = String(describing: DetailPhotoCollectionViewCell.self)
     
     let myImageView: UIImageView = {
         let imageView = UIImageView()
@@ -35,18 +34,14 @@ class DetailPhotoCollectionViewCell: UICollectionViewCell {
     }
     
     func setupConstraints() {
-//        myImageView.heightAnchor.constraint(equalToConstant: 480).isActive = true
-//        myImageView.widthAnchor.constraint(equalToConstant: 320).isActive = true
         myImageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         myImageView.topAnchor.constraint(equalTo: topAnchor, constant: 15).isActive = true
         myImageView.leftAnchor.constraint(equalTo: leftAnchor, constant: 10).isActive = true
         myImageView.rightAnchor.constraint(equalTo: rightAnchor, constant: -10).isActive = true
         myImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15).isActive = true
-        
     }
     
     func loadImage(imgStr: String) {
-        print("load image")
         guard let url = URL(string: imgStr) else { return }
         
         if let cacheImage = imageCache.object(forKey: url.absoluteString as NSString) {

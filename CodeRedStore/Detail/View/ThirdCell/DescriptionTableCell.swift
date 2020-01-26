@@ -9,8 +9,7 @@
 import UIKit
 
 class DescriptionTableViewCell: UITableViewCell {
-    
-    static let descriptionCell = "descriptionTableViewCell"
+    static let id = String(describing: DescriptionTableViewCell.self)
     
     var nameLabel: UILabel = {
         let label = UILabel()
