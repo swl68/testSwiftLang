@@ -22,10 +22,22 @@ class DetailPhotoCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
+    let activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
+        indicator.color = .black
+        return indicator
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .lightGray
         addSubview(myImageView)
+        
+        activityIndicator.center = center
+        activityIndicator.style = .whiteLarge
+        myImageView.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+        
         setupConstraints()
     }
     
@@ -44,19 +56,15 @@ class DetailPhotoCollectionViewCell: UICollectionViewCell {
     func loadImage(imgStr: String) {
         guard let url = URL(string: imgStr) else { return }
         
-        if let cacheImage = imageCache.object(forKey: url.absoluteString as NSString) {
-            self.myImageView.image = cacheImage
-        } else {
-        
-            DispatchQueue.global(qos: .background).async {
-                
-                guard let loadData = try? Data(contentsOf: url) else { return }
-                
-                DispatchQueue.main.async {
-                    guard let loadImage = UIImage(data: loadData) else { return }
-                        self.myImageView.image = loadImage
-                    imageCache.setObject(loadImage, forKey: url.absoluteString as NSString)
-                }
+        DispatchQueue.global(qos: .background).async {
+            
+            guard let loadData = try? Data(contentsOf: url) else { return }
+            
+            DispatchQueue.main.async {
+                guard let loadImage = UIImage(data: loadData) else { return }
+                self.activityIndicator.stopAnimating()
+                self.activityIndicator.removeFromSuperview()
+                self.myImageView.image = loadImage
             }
         }
     }

@@ -9,13 +9,11 @@
 import Foundation
 import UIKit
 
-// output protocol
 protocol DetailViewProtocol: class {
     func showError(error: String)
     func dataChanged()
 }
 
-// input protocol
 protocol DetailViewPresenterProtocol: class {
     init(view: DetailViewProtocol, detailUrlStr: String)
     func getDetail()

@@ -10,17 +10,27 @@ import UIKit
 
 class MainViewController: UIViewController {
     
-    var presenter = MainViewPresenter()
+    var presenter: MainViewPreseneterProtocol?
     var myCollectionView = MainCollectionView()
+    var indicatorLoad: IndicatorLoad?
+    
+    var myActivityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
+        activityIndicator.hidesWhenStopped = true
+        return activityIndicator
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.delegate = self
+        //presenter.delegate = self
+        indicatorLoad = IndicatorLoad()
         setupCollectionView()
         setupConstraints()
+        indicatorLoad?.showIndicator(view: self.view, indicator: myActivityIndicator)
     }
     
     func setupCollectionView() {
+        //navigationItem.title = "Мужское"
         myCollectionView.delegate = self
         myCollectionView.dataSource = self
         view.addSubview(myCollectionView)
@@ -43,12 +53,17 @@ extension MainViewController: MainViewPresenterDelegate {
     func updateData() {
         DispatchQueue.main.async {
             print("reload collection")
+            self.indicatorLoad?.hideIndicator(view: self.view, indicator: self.myActivityIndicator)
             self.myCollectionView.reloadData()
         }
     }
     
     func showError(error: String) {
-        showAlert("Error", error)
+        DispatchQueue.main.async {
+            self.indicatorLoad?.hideIndicator(view: self.view, indicator: self.myActivityIndicator)
+            self.showAlert("Ok", error)
+        }
+       
     }
     
 }
@@ -57,30 +72,32 @@ extension MainViewController: MainViewPresenterDelegate {
 extension MainViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("number of row in sections")
-        return presenter.getDataSourceCount()
+        return presenter?.getDataSourceCount() ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainCollectionViewCell.mainCell, for: indexPath) as? MainCollectionViewCell {
             
-            let item = presenter.getItem(index: indexPath.row)
-            cell.loadImage(imgStr: item.imgURL!)
-            cell.configureCell(description: item.itemDescription!, brand: item.brand!, coast: item.coast!, imgUrl: item.imgURL!)
-            return cell
+            if let item = presenter?.getItem(index: indexPath.row) {
+                
+                cell.loadImage(imgStr: item.imgURL!)
+                cell.configureCell(description: item.itemDescription!, brand: item.brand!, coast: item.coast!, imgUrl: item.imgURL!)
+            }
+                return cell
+            
         } else {
             return UICollectionViewCell()
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if indexPath.row == presenter.getDataSourceCount() - 5 &&  presenter.getNextPage() > 1 {
-            presenter.loadMore()
+        if indexPath.row == (presenter?.getDataSourceCount() ?? 0) - 5 &&  presenter?.getNextPage() ?? 0 > 1 {
+            presenter?.loadMore()
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let detailUrl = presenter.getItem(index: indexPath.row).detailURL else { return }
+        guard let detailUrl = presenter?.getItem(index: indexPath.row).detailURL else { return }
         let detailViewController = DetailViewController()
         let detailViewPresenter = DetailViewPresenter(view: detailViewController, detailUrlStr: detailUrl)
         detailViewController.presenter = detailViewPresenter

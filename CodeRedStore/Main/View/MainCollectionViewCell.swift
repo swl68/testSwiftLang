@@ -18,6 +18,7 @@ class MainCollectionViewCell: UICollectionViewCell {
     var myImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "placeholder.jpg")
+        imageView.backgroundColor = .gray
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -41,9 +42,17 @@ class MainCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+    let activityIndicator: UIActivityIndicatorView = {
+           let indicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
+           return indicator
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        layer.cornerRadius = 5
+        layer.cornerRadius = 10
+        layer.shadowRadius = 2
+        layer.shadowOffset = .init(width: 2, height: 2)
+        backgroundColor = .lightGray
         setupElements()
         setupConstraints()
     }
@@ -57,6 +66,11 @@ class MainCollectionViewCell: UICollectionViewCell {
         addSubview(descriptionLabel)
         addSubview(brandLabel)
         addSubview(coastLabel)
+    
+        activityIndicator.style = .whiteLarge
+        activityIndicator.center = CGPoint(x: self.bounds.width / 2, y: self.bounds.height / 2 - 60)
+        addSubview(activityIndicator)
+        activityIndicator.startAnimating()
     }
     
     func setupConstraints() {
@@ -90,6 +104,8 @@ class MainCollectionViewCell: UICollectionViewCell {
         guard let url = URL(string: imgStr) else { return }
         
         if let cacheImage = imageCache.object(forKey: url.absoluteString as NSString) {
+            activityIndicator.stopAnimating()
+            activityIndicator.removeFromSuperview()
             self.myImageView.image = cacheImage
         } else {
             myImageView.image = nil
@@ -101,6 +117,8 @@ class MainCollectionViewCell: UICollectionViewCell {
                     guard let loadImage = UIImage(data: loadData) else { return }
                     
                     if self.imageUrlString == imgStr {
+                        self.activityIndicator.stopAnimating()
+                        self.activityIndicator.removeFromSuperview()
                         self.myImageView.image = loadImage
                     }
                     imageCache.setObject(loadImage, forKey: url.absoluteString as NSString)

@@ -32,9 +32,17 @@ class NetworkManager {
                 guard let rowData = resultRequest.data else { return }
                 do {
                     let decodableData = try JSONDecoder().decode(Main.self, from: rowData)
-                    guard let items = decodableData.data?.items else { return }
                     
-                    completion(Result.success(items) )
+                    if let items = decodableData.data?.items {
+                 //   guard let items = decodableData.data?.items else { return }
+                        completion(Result.success(items) )
+                    } else {
+                        completion(Result.failed("Товар не найден"))
+                    }
+                   // } else {
+                 //       completion(Result.failed("Товар не найден"))
+               //     }
+                    
                 } catch {
                     completion(Result.failed("Ошибка декодирования, сообщите администратору"))
                 }

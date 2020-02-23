@@ -13,16 +13,29 @@ protocol MainViewPresenterDelegate: class {
     func showError(error: String)
 }
 
-class MainViewPresenter {
-   
+protocol MainViewPreseneterProtocol: class {
+    init(view: MainViewPresenterDelegate, typeKey: String)
+    func getClothes()
+    func getDataSource() -> [Item]
+    func getDataSourceCount() -> Int
+    func getNextPage() -> Int
+    func getItem(index: Int) -> Item
+    func loadMore()
+}
+
+class MainViewPresenter: MainViewPreseneterProtocol {
+    
     private var model = MainViewControllerModel(nextPage: 1, isEmptyPage: false)
     private let networkManager = NetworkManager.shared
-    weak var delegate: MainViewPresenterDelegate?
     
     var typeKey = "shapki"// "bryuki" //"sumki"
     
-    init() {
-        updateDataSource()
+    weak var view: MainViewPresenterDelegate?
+    
+    required init(view: MainViewPresenterDelegate, typeKey: String) {
+        self.view = view
+        self.typeKey = typeKey
+        getClothes()
     }
     
     func getDataSource() -> [Item] {
@@ -43,23 +56,27 @@ class MainViewPresenter {
     
     func loadMore() {
         if !model.isEmptyPage {
-            updateDataSource()
+            getClothes()
         }
     }
     
     private func updateView() {
-        self.delegate?.updateData()
+        self.view?.updateData()
     }
     
-    private func updateDataSource() {
+    func getClothes() {
         print("updateDataSource")
         
         networkManager.getClothes(from: Endpoint.url, with: Keys.typeKey + typeKey + Keys.pageKey + "\(model.nextPage)" + Endpoint.api) { (result) in
+            
+            print("function get clothes")
+            
             switch result {
             case .success(let items): self.prepareModel(items: items)
                 print("success")
-                
-            case .failed(let err): self.delegate?.showError(error: err)
+            print("Количество элементов \(items.items.count)")
+            case .failed(let err): self.view?.showError(error: err)
+                print("case failed")
             }
         }
     }
@@ -75,11 +92,10 @@ class MainViewPresenter {
         updateView()
     }
     
+    deinit {
+        print("deinit main presenter")
+    }
+    
 }
 
-//extension MainViewPresenter: MainViewControllerModelDelegate {
-//    func dataChanged() {
-//        updateView()
-//        print("update View in presenter")
-//    }
-//}
+

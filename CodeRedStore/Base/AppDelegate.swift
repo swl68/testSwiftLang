@@ -11,9 +11,7 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
     var window: UIWindow?
-    
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
@@ -27,11 +25,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func setupMain() {
         window = UIWindow()
-
-        let mainVc = MainViewController()
+        print("setup main")
+        let mainVc = StartViewController()//MainViewController()
         let rootVc = UINavigationController(rootViewController: mainVc)
         window?.rootViewController = rootVc
-        //window?.backgroundColor = .black
         window?.makeKeyAndVisible()
     }
 

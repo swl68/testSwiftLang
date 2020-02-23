@@ -10,7 +10,7 @@ import Foundation
 
 // MARK: - Main
 struct Main: Decodable {
-    let success: Bool?
+    let success: Bool
     let outputScenario: String?
     let data: Output?
     let stateToken: String?

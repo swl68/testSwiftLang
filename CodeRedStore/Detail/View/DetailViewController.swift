@@ -12,11 +12,20 @@ class DetailViewController: UIViewController {
 
     var presenter: DetailViewPresenterProtocol?
     var tableView = UITableView()
+    var indicatorLoad: IndicatorLoad?
+    
+    var myActivityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
+        activityIndicator.hidesWhenStopped = true
+        return activityIndicator
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        indicatorLoad = IndicatorLoad()
         setupTableView()
         setupConstraint()
+        indicatorLoad?.showIndicator(view: self.view, indicator: myActivityIndicator)
     }
     
     func setupTableView() {
@@ -46,10 +55,12 @@ class DetailViewController: UIViewController {
 extension DetailViewController: DetailViewProtocol {
   
     func showError(error: String) {
-        showAlert("ok", error)
+        self.indicatorLoad?.hideIndicator(view: self.view, indicator: self.myActivityIndicator)
+        showAlert("Ok", error)
     }
     
     func dataChanged() {
+        self.indicatorLoad?.hideIndicator(view: self.view, indicator: self.myActivityIndicator)
         self.tableView.reloadData()
     }
 }
