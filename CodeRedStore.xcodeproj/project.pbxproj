@@ -13,8 +13,10 @@
 		0C084C1223DDD10B00F26232 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C084C1123DDD10B00F26232 /* StartViewController.swift */; };
 		0C09504F23FE94A3000EC789 /* IndicartorLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C09504E23FE94A3000EC789 /* IndicartorLoad.swift */; };
 		0C095D98239D5F50009BFA1D /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C095D97239D5F50009BFA1D /* Extension.swift */; };
+		0C09C5A4240452A200BBCDAC /* Slide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C09C5A3240452A200BBCDAC /* Slide.swift */; };
 		0C09F21D23DFA3F6005F6C5D /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C09F21B23DFA3F6005F6C5D /* TableViewCell.swift */; };
 		0C0D77F123DC6D7700466BD8 /* DescriptionTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0D77F023DC6D7700466BD8 /* DescriptionTableCell.swift */; };
+		0C0D818A240596880074C5E3 /* CacheImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0D8189240596880074C5E3 /* CacheImage.swift */; };
 		0C1CCB3B23E4621C0055E296 /* StartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1CCB3A23E4621C0055E296 /* StartModel.swift */; };
 		0C22AB4723B0DD4800F6B624 /* DetailSizeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C22AB4623B0DD4800F6B624 /* DetailSizeCollectionViewCell.swift */; };
 		0C517CE4238F130700CDE259 /* MainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C517CE2238F130700CDE259 /* MainCollectionViewCell.swift */; };
@@ -42,8 +44,10 @@
 		0C084C1123DDD10B00F26232 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		0C09504E23FE94A3000EC789 /* IndicartorLoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicartorLoad.swift; sourceTree = "<group>"; };
 		0C095D97239D5F50009BFA1D /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		0C09C5A3240452A200BBCDAC /* Slide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slide.swift; sourceTree = "<group>"; };
 		0C09F21B23DFA3F6005F6C5D /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		0C0D77F023DC6D7700466BD8 /* DescriptionTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionTableCell.swift; sourceTree = "<group>"; };
+		0C0D8189240596880074C5E3 /* CacheImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheImage.swift; sourceTree = "<group>"; };
 		0C1CCB3A23E4621C0055E296 /* StartModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartModel.swift; sourceTree = "<group>"; };
 		0C22AB4623B0DD4800F6B624 /* DetailSizeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailSizeCollectionViewCell.swift; sourceTree = "<group>"; };
 		0C517CE2238F130700CDE259 /* MainCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -102,6 +106,7 @@
 				0CA189C323B2E01300D0E7F3 /* FirstCell */,
 				0CA189C423B2E04700D0E7F3 /* SecondCell */,
 				0C0D77F223DC6D7D00466BD8 /* ThirdCell */,
+				0C09C5A3240452A200BBCDAC /* Slide.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -261,6 +266,7 @@
 				0CE0889D238EFFCA0078F8B5 /* JSONDecode.swift */,
 				0C09504E23FE94A3000EC789 /* IndicartorLoad.swift */,
 				0C095D97239D5F50009BFA1D /* Extension.swift */,
+				0C0D8189240596880074C5E3 /* CacheImage.swift */,
 				0C872AD72395453B00AD5DEA /* Base */,
 				0C872AD8239545B800AD5DEA /* Constant */,
 				0C084C0F23DDD0B100F26232 /* Start */,
@@ -350,12 +356,14 @@
 				0CE0889E238EFFCA0078F8B5 /* JSONDecode.swift in Sources */,
 				0C1CCB3B23E4621C0055E296 /* StartModel.swift in Sources */,
 				0C095D98239D5F50009BFA1D /* Extension.swift in Sources */,
+				0C09C5A4240452A200BBCDAC /* Slide.swift in Sources */,
 				0C084C1223DDD10B00F26232 /* StartViewController.swift in Sources */,
 				0C09F21D23DFA3F6005F6C5D /* TableViewCell.swift in Sources */,
 				0C00C28F239EF7FA0090AA2D /* DetailViewPresenter.swift in Sources */,
 				0C517CE4238F130700CDE259 /* MainCollectionViewCell.swift in Sources */,
 				0CA189C623B2E08A00D0E7F3 /* AnotherColorTableViewCell.swift in Sources */,
 				0CE0888A238EFFB60078F8B5 /* AppDelegate.swift in Sources */,
+				0C0D818A240596880074C5E3 /* CacheImage.swift in Sources */,
 				0C07378923A148E1005C59B2 /* DetailPhotoCollectionViewCell.swift in Sources */,
 				0C80E97E23919D5F00239794 /* NetworkManager.swift in Sources */,
 				0C760BF12396BB2100E328BF /* MainViewControllerModel.swift in Sources */,

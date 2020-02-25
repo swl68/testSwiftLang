@@ -18,7 +18,6 @@ enum CellModelType {
 protocol CellModelItem {
     var type: CellModelType { get }
     var rowItem: Int { get }
-    var sectionTitle: String { get }
 }
 
 extension CellModelItem {
@@ -34,10 +33,6 @@ class PhotoModel: CellModelItem {
     
     var type: CellModelType {
         return .detail
-    }
-    
-    var sectionTitle: String {
-        return ""
     }
     
     var rowItem: Int {
@@ -57,10 +52,6 @@ class AnotherModel: CellModelItem {
         return .another
     }
     
-    var sectionTitle: String {
-        return "Другие цвета"
-    }
-    
     var rowItem: Int {
         return anotherItems.count
     }
@@ -78,10 +69,6 @@ class DescriptionModel: CellModelItem {
     
     var type: CellModelType {
         return .description
-    }
-    
-    var sectionTitle: String {
-        return "Описание"
     }
     
     init(description: String, name: String, brand: String, coast: String) {

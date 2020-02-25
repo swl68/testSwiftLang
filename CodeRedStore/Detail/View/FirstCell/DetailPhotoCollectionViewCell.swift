@@ -9,10 +9,9 @@
 
 import UIKit
 
-fileprivate let imageCache = NSCache<NSString, UIImage>()
-
-class DetailPhotoCollectionViewCell: UICollectionViewCell {
+class DetailPhotoCollectionViewCell: UICollectionViewCell, CacheImageProtocol {
     static let id = String(describing: DetailPhotoCollectionViewCell.self)
+    let cacheImage = CacheImage()
     
     let myImageView: UIImageView = {
         let imageView = UIImageView()
@@ -30,14 +29,11 @@ class DetailPhotoCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        cacheImage.delegateImage = self
         backgroundColor = .lightGray
         addSubview(myImageView)
-        
         activityIndicator.center = center
         activityIndicator.style = .whiteLarge
-        myImageView.addSubview(activityIndicator)
-        activityIndicator.startAnimating()
-        
         setupConstraints()
     }
     
@@ -53,20 +49,28 @@ class DetailPhotoCollectionViewCell: UICollectionViewCell {
         myImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15).isActive = true
     }
     
-    func loadImage(imgStr: String) {
-        guard let url = URL(string: imgStr) else { return }
-        
-        DispatchQueue.global(qos: .background).async {
-            
-            guard let loadData = try? Data(contentsOf: url) else { return }
-            
-            DispatchQueue.main.async {
-                guard let loadImage = UIImage(data: loadData) else { return }
-                self.activityIndicator.stopAnimating()
-                self.activityIndicator.removeFromSuperview()
-                self.myImageView.image = loadImage
-            }
-        }
+    override func prepareForReuse() {
+        myImageView.image = nil
+        startActivity()
     }
     
+    func getImage(completeImage: UIImage) {
+        myImageView.image = completeImage
+        stopActivity()
+    }
+    
+    func loadImage(imgStr: String) {
+        startActivity()
+        cacheImage.loadImageFromCache(imageStr: imgStr)
+    }
+    
+    func startActivity() {
+        addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+    }
+    
+    func stopActivity() {
+        activityIndicator.stopAnimating()
+        activityIndicator.removeFromSuperview()
+    }
 }

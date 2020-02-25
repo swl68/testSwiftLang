@@ -9,8 +9,6 @@
 
 import UIKit
 
-fileprivate let imageCache = NSCache<NSString, UIImage>()
-
 class DetailSizeCollectionViewCell: UICollectionViewCell {
     static let id = String(describing: DetailSizeCollectionViewCell.self)
     
@@ -43,18 +41,13 @@ class DetailSizeCollectionViewCell: UICollectionViewCell {
     func loadImage(imgStr: String) {
         guard let url = URL(string: imgStr) else { return }
         
-        if let cacheImage = imageCache.object(forKey: url.absoluteString as NSString) {
-            self.myImageView.image = cacheImage
-        } else {
-            DispatchQueue.global(qos: .background).async {
-                
-                guard let loadData = try? Data(contentsOf: url) else { return }
-                
-                DispatchQueue.main.async {
-                    guard let loadImage = UIImage(data: loadData) else { return }
-                        self.myImageView.image = loadImage
-                    imageCache.setObject(loadImage, forKey: url.absoluteString as NSString)
-                }
+        DispatchQueue.global(qos: .background).async {
+            
+            guard let loadData = try? Data(contentsOf: url) else { return }
+            
+            DispatchQueue.main.async {
+                guard let loadImage = UIImage(data: loadData) else { return }
+                self.myImageView.image = loadImage
             }
         }
     }

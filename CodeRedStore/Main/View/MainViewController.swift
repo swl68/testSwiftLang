@@ -22,7 +22,7 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //presenter.delegate = self
+        
         indicatorLoad = IndicatorLoad()
         setupCollectionView()
         setupConstraints()
@@ -75,6 +75,7 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
         return presenter?.getDataSourceCount() ?? 0
     }
     
+    // создать отдельную модель для элементов и удалить форс анрапы
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainCollectionViewCell.mainCell, for: indexPath) as? MainCollectionViewCell {
             

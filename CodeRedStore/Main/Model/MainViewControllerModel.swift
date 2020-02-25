@@ -9,9 +9,7 @@
 import Foundation
 
 struct MainViewControllerModel {
-    
     var dataSource: [Item] = []
     var nextPage: Int
     var isEmptyPage: Bool
-    
 }

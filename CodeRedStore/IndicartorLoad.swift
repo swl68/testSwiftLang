@@ -8,7 +8,7 @@
 
 import UIKit
 
-// Похже завязать на протокол
+// Позже завязать на протокол
 protocol IndicatorLoadProtocol: class {
     func showIndicator(view: UIView, indicator: UIActivityIndicatorView)
     func hideIndicator(view: UIView, indicator: UIActivityIndicatorView)

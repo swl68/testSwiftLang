@@ -21,6 +21,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         print("setup scene delegate")
         let mainVc = StartViewController()//MainViewController()
         let rootVc = UINavigationController(rootViewController: mainVc)
+        rootVc.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        rootVc.navigationBar.barTintColor = .black
+        rootVc.navigationBar.tintColor = .white
         window?.rootViewController = rootVc
         window?.backgroundColor = .white
         window?.makeKeyAndVisible()
