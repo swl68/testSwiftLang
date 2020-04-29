@@ -26,12 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func setupMain() {
         window = UIWindow()
         print("setup main")
-        let mainVc = StartViewController()//MainViewController()
-        let rootVc = UINavigationController(rootViewController: mainVc)
-        rootVc.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        rootVc.navigationBar.barTintColor = .black
-        rootVc.navigationBar.tintColor = .white
-        window?.rootViewController = rootVc
+        window?.rootViewController = ModuleBuilder.createTabBarModule()
         window?.makeKeyAndVisible()
     }
 

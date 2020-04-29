@@ -7,12 +7,12 @@
 //
 
 import Foundation
-import UIKit
 
 enum CellModelType {
     case detail
     case another
     case description
+    case size
 }
 
 protocol CellModelItem {
@@ -24,6 +24,10 @@ extension CellModelItem {
     var rowItem: Int {
         return 1
     }
+}
+
+class DetailViewModel {
+    
 }
 
 
@@ -79,3 +83,23 @@ class DescriptionModel: CellModelItem {
     }
 }
 
+class SizeModel: CellModelItem {
+    
+    var size: [String]
+    var isSelectedCell: Bool = false
+    var index: Int?
+    var sizeItem: String = ""
+    
+    var type: CellModelType {
+        return .size
+    }
+    
+    var rowItem: Int {
+        return size.count
+    }
+    
+    init(size: [String]) {
+        self.size = size
+    }
+    
+}

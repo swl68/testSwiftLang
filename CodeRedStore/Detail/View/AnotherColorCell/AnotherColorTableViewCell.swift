@@ -8,8 +8,8 @@
 
 import UIKit
 
-class DetailTableViewCell: UITableViewCell, UICollectionViewDelegateFlowLayout {
-    static let id = String(describing: DetailTableViewCell.self)
+class AnotherColorTableViewCell: UITableViewCell, UICollectionViewDelegateFlowLayout {
+    static let id = String(describing: AnotherColorTableViewCell.self)
     
     private var layout = UICollectionViewFlowLayout()
     private var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -18,12 +18,11 @@ class DetailTableViewCell: UITableViewCell, UICollectionViewDelegateFlowLayout {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         layout.scrollDirection = UICollectionView.ScrollDirection.horizontal
         
-        collectionView.backgroundColor = .lightGray
+        collectionView.backgroundColor = .white
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.collectionViewLayout = layout
-        collectionView.isPagingEnabled = true
         
-        collectionView.register(DetailPhotoCollectionViewCell.self, forCellWithReuseIdentifier: DetailPhotoCollectionViewCell.id)
+        collectionView.register(DetailSizeCollectionViewCell.self, forCellWithReuseIdentifier: DetailSizeCollectionViewCell.id)
         addSubview(collectionView)
         setupConstraints()
     }
@@ -43,8 +42,9 @@ class DetailTableViewCell: UITableViewCell, UICollectionViewDelegateFlowLayout {
         collectionView.delegate = dataSourceDelegate
         collectionView.dataSource = dataSourceDelegate
         
-        layout.itemSize = CGSize(width: self.frame.width, height: self.frame.height)
+        layout.itemSize = CGSize(width: 55, height: 55)
         collectionView.collectionViewLayout = layout
+        
         collectionView.tag = row
         collectionView.reloadData()
     }

@@ -58,8 +58,7 @@ struct Item: Decodable {
 // MARK: - DetailItem
 struct DetailItem: Decodable {
     let anotherColorUrls: [String]?
-    let imgURLArray, imgURLAnotherColor: [String]?
-    let size: [String]?
+    let imgURLArray, imgURLAnotherColor, size: [String]?
     let name, brand, coast: String
     let dataDescription: String
 
@@ -67,7 +66,7 @@ struct DetailItem: Decodable {
         case anotherColorUrls
         case imgURLArray = "imgUrlArray"
         case imgURLAnotherColor = "imgUrlAnotherColor"
-        case size
+        case size = "size"
         case dataDescription = "description"
         case name, brand, coast
     }

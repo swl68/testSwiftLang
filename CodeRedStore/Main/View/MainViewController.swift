@@ -14,19 +14,13 @@ class MainViewController: UIViewController {
     var myCollectionView = MainCollectionView()
     var indicatorLoad: IndicatorLoad?
     
-    var myActivityIndicator: UIActivityIndicatorView = {
-        let activityIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
-        activityIndicator.hidesWhenStopped = true
-        return activityIndicator
-    }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         indicatorLoad = IndicatorLoad()
         setupCollectionView()
         setupConstraints()
-        indicatorLoad?.showIndicator(view: self.view, indicator: myActivityIndicator)
+        indicatorLoad?.showIndicator(view: self.view)
     }
     
     func setupCollectionView() {
@@ -53,17 +47,16 @@ extension MainViewController: MainViewPresenterDelegate {
     func updateData() {
         DispatchQueue.main.async {
             print("reload collection")
-            self.indicatorLoad?.hideIndicator(view: self.view, indicator: self.myActivityIndicator)
+            self.indicatorLoad?.hideIndicator(view: self.view)
             self.myCollectionView.reloadData()
         }
     }
     
     func showError(error: String) {
         DispatchQueue.main.async {
-            self.indicatorLoad?.hideIndicator(view: self.view, indicator: self.myActivityIndicator)
+            self.indicatorLoad?.hideIndicator(view: self.view)
             self.showAlert("Ok", error)
         }
-       
     }
     
 }
@@ -75,14 +68,12 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
         return presenter?.getDataSourceCount() ?? 0
     }
     
-    // создать отдельную модель для элементов и удалить форс анрапы
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainCollectionViewCell.mainCell, for: indexPath) as? MainCollectionViewCell {
             
             if let item = presenter?.getItem(index: indexPath.row) {
-                
-                cell.loadImage(imgStr: item.imgURL!)
-                cell.configureCell(description: item.itemDescription!, brand: item.brand!, coast: item.coast!, imgUrl: item.imgURL!)
+                cell.loadImage(imgStr: item.imgURL)
+                cell.configureCell(itemCell: item)
             }
                 return cell
             

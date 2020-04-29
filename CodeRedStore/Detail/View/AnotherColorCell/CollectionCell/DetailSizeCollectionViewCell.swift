@@ -31,10 +31,10 @@ class DetailSizeCollectionViewCell: UICollectionViewCell {
     }
     
     func setupConstraints() {
-        myImageView.topAnchor.constraint(equalTo: topAnchor, constant: 5).isActive = true
-        myImageView.leftAnchor.constraint(equalTo: leftAnchor, constant: 5).isActive = true
-        myImageView.rightAnchor.constraint(equalTo: rightAnchor, constant: -5).isActive = true
-        myImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5).isActive = true
+        myImageView.topAnchor.constraint(equalTo: topAnchor, constant: 2).isActive = true
+        myImageView.leftAnchor.constraint(equalTo: leftAnchor, constant: 2).isActive = true
+        myImageView.rightAnchor.constraint(equalTo: rightAnchor, constant: -2).isActive = true
+        myImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -2).isActive = true
         myImageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
     }
     

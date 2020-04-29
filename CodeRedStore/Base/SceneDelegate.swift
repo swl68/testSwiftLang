@@ -19,13 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
         print("setup scene delegate")
-        let mainVc = StartViewController()//MainViewController()
-        let rootVc = UINavigationController(rootViewController: mainVc)
-        rootVc.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        rootVc.navigationBar.barTintColor = .black
-        rootVc.navigationBar.tintColor = .white
-        window?.rootViewController = rootVc
-        window?.backgroundColor = .white
+        window?.rootViewController = ModuleBuilder.createTabBarModule()
         window?.makeKeyAndVisible()
         
     }

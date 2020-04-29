@@ -47,10 +47,11 @@ class MainCollectionViewCell: UICollectionViewCell, CacheImageProtocol {
     override init(frame: CGRect) {
         super.init(frame: frame)
         cacheImage.delegateImage = self
-        layer.cornerRadius = 10
-        layer.shadowRadius = 2
-        layer.shadowOffset = .init(width: 2, height: 2)
-        backgroundColor = .lightGray
+       // layer.cornerRadius = 10
+      //  layer.shadowRadius = 2
+        layer.shadowOffset = .init(width: 1, height: 1)
+        layer.cornerRadius = 3
+        layer.shadowOpacity = 0.4
         setupElements()
         setupConstraints()
     }
@@ -86,10 +87,10 @@ class MainCollectionViewCell: UICollectionViewCell, CacheImageProtocol {
         coastLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
     }
     
-    func configureCell(description: String, brand: String, coast: String, imgUrl: String) {
-        descriptionLabel.text = description
-        brandLabel.text = brand
-        coastLabel.text = coast
+    func configureCell(itemCell: CompleteModel) {
+        descriptionLabel.text = itemCell.itemDescription
+        brandLabel.text = itemCell.brand
+        coastLabel.text = itemCell.coast
     }
     
     override func prepareForReuse() {

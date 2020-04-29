@@ -10,8 +10,6 @@ import Foundation
 
 class NetworkRequest {
     
-    static let shared = NetworkRequest()
-    private init() {}
     typealias resultRequest = (data: Data?, response: URLResponse?, error: Error?)
     
     private func createRequest(from url: URL, with parameters: String) -> URLRequest {
@@ -23,7 +21,6 @@ class NetworkRequest {
     }
     
     func request(from url: URL, with parameters: String, completion: @escaping (resultRequest) -> () ) {
-        //guard let url = URL(string: Endpoint.url) else { return }
         let request = createRequest(from: url, with: parameters)
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             let httpResponse = response as? HTTPURLResponse

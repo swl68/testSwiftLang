@@ -11,7 +11,7 @@ import Foundation
 struct Endpoint {
     static let url = "https://wrapapi.com/use/studyjson/coder/new/latest?"
     static let api = "&wrapAPIKey=NUakaUWOUwpq8kjAk3Yv1xpkrmaNSQJc"
-    static let detailUrl = "https://wrapapi.com/use/studyjson/cred/detail/0.0.2?detail="
+    static let detailUrl = "https://wrapapi.com/use/studyjson/cred/detail/0.0.4?detail="
 }
 
 struct Keys {

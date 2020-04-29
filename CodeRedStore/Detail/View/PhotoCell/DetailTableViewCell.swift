@@ -8,8 +8,8 @@
 
 import UIKit
 
-class AnotherColorTableViewCell: UITableViewCell, UICollectionViewDelegateFlowLayout {
-    static let id = String(describing: AnotherColorTableViewCell.self)
+class DetailTableViewCell: UITableViewCell, UICollectionViewDelegateFlowLayout {
+    static let id = String(describing: DetailTableViewCell.self)
     
     private var layout = UICollectionViewFlowLayout()
     private var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -21,8 +21,9 @@ class AnotherColorTableViewCell: UITableViewCell, UICollectionViewDelegateFlowLa
         collectionView.backgroundColor = .white
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.collectionViewLayout = layout
+        collectionView.isPagingEnabled = true
         
-        collectionView.register(DetailSizeCollectionViewCell.self, forCellWithReuseIdentifier: DetailSizeCollectionViewCell.id)
+        collectionView.register(DetailPhotoCollectionViewCell.self, forCellWithReuseIdentifier: DetailPhotoCollectionViewCell.id)
         addSubview(collectionView)
         setupConstraints()
     }
@@ -42,9 +43,8 @@ class AnotherColorTableViewCell: UITableViewCell, UICollectionViewDelegateFlowLa
         collectionView.delegate = dataSourceDelegate
         collectionView.dataSource = dataSourceDelegate
         
-        layout.itemSize = CGSize(width: 46, height: 46)
+        layout.itemSize = CGSize(width: self.frame.width, height: self.frame.height)
         collectionView.collectionViewLayout = layout
-        
         collectionView.tag = row
         collectionView.reloadData()
     }

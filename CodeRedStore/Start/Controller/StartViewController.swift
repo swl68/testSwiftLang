@@ -29,6 +29,7 @@ class StartViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
        // navigationController?.navigationBar.prefersLargeTitles = true
+        
         navigationItem.title = "Главная"
    
         setupTableView()
@@ -44,7 +45,7 @@ class StartViewController: UIViewController {
     func setupStackView(views: [UIView]) {
         let stackView = UIStackView(arrangedSubviews: views)
         stackView.axis = .vertical
-        stackView.spacing = 10
+        stackView.spacing = 5
         stackView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(stackView)
         stackView.topAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor).isActive = true

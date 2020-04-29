@@ -15,9 +15,11 @@ enum Result<T> {
 
 class NetworkManager {
     
-    static let shared = NetworkManager()
-    private init() {}
-    let networkRequest = NetworkRequest.shared
+    let networkRequest: NetworkRequest
+    
+    init(networkRequest: NetworkRequest = NetworkRequest()) {
+        self.networkRequest = networkRequest
+    }
     
     func getClothes(from urlStr: String, with parametrs: String, completion: @escaping(Result<Items>) -> () ) {
         
@@ -34,17 +36,12 @@ class NetworkManager {
                     let decodableData = try JSONDecoder().decode(Main.self, from: rowData)
                     
                     if let items = decodableData.data?.items {
-                 //   guard let items = decodableData.data?.items else { return }
                         completion(Result.success(items) )
                     } else {
-                        completion(Result.failed("Товар не найден"))
+                        completion(Result.failed(Errors.noResults.rawValue))
                     }
-                   // } else {
-                 //       completion(Result.failed("Товар не найден"))
-               //     }
-                    
                 } catch {
-                    completion(Result.failed("Ошибка декодирования, сообщите администратору"))
+                    completion(Result.failed(Errors.decodeError.rawValue))
                 }
             }
         }
@@ -67,7 +64,7 @@ class NetworkManager {
                     
                     completion(Result.success(item) )
                 } catch {
-                    completion(Result.failed("Ошибка декодирования, сообщите администратору"))
+                    completion(Result.failed(Errors.decodeError.rawValue))
                 }
             }
         }

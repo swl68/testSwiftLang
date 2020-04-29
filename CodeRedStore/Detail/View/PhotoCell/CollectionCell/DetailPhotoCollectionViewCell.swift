@@ -15,7 +15,7 @@ class DetailPhotoCollectionViewCell: UICollectionViewCell, CacheImageProtocol {
     
     let myImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .lightGray
+        imageView.backgroundColor = .white
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -30,7 +30,7 @@ class DetailPhotoCollectionViewCell: UICollectionViewCell, CacheImageProtocol {
     override init(frame: CGRect) {
         super.init(frame: frame)
         cacheImage.delegateImage = self
-        backgroundColor = .lightGray
+        backgroundColor = .white
         addSubview(myImageView)
         activityIndicator.center = center
         activityIndicator.style = .whiteLarge
@@ -50,6 +50,7 @@ class DetailPhotoCollectionViewCell: UICollectionViewCell, CacheImageProtocol {
     }
     
     override func prepareForReuse() {
+        super.prepareForReuse()
         myImageView.image = nil
         startActivity()
     }

@@ -16,17 +16,18 @@ protocol MainViewPresenterDelegate: class {
 protocol MainViewPreseneterProtocol: class {
     init(view: MainViewPresenterDelegate, typeKey: String)
     func getClothes()
-    func getDataSource() -> [Item]
+    func getDataSource() -> [CompleteModel]
     func getDataSourceCount() -> Int
     func getNextPage() -> Int
-    func getItem(index: Int) -> Item
+    func getItem(index: Int) -> CompleteModel
     func loadMore()
 }
 
 class MainViewPresenter: MainViewPreseneterProtocol {
     
     private var model = MainViewControllerModel(nextPage: 1, isEmptyPage: false)
-    private let networkManager = NetworkManager.shared
+   // private let networkManager = NetworkManager.shared
+    private let networkManager = NetworkManager()
     
     var typeKey = "shapki"// "bryuki" //"sumki"
     
@@ -38,7 +39,7 @@ class MainViewPresenter: MainViewPreseneterProtocol {
         getClothes()
     }
     
-    func getDataSource() -> [Item] {
+    func getDataSource() -> [CompleteModel] {
         return model.dataSource
     }
     
@@ -50,7 +51,7 @@ class MainViewPresenter: MainViewPreseneterProtocol {
         return model.nextPage
     }
     
-    func getItem(index: Int) -> Item {
+    func getItem(index: Int) -> CompleteModel {
         return model.dataSource[index]
     }
     
@@ -69,8 +70,6 @@ class MainViewPresenter: MainViewPreseneterProtocol {
         
         networkManager.getClothes(from: Endpoint.url, with: Keys.typeKey + typeKey + Keys.pageKey + "\(model.nextPage)" + Endpoint.api) { (result) in
             
-            print("function get clothes")
-            
             switch result {
             case .success(let items): self.prepareModel(items: items)
                 print("success")
@@ -87,8 +86,7 @@ class MainViewPresenter: MainViewPreseneterProtocol {
             model.nextPage = page
             model.isEmptyPage = !model.isEmptyPage
         }
-        
-        model.dataSource += items.items
+        items.items.forEach { model.dataSource.append(CompleteModel(item: $0)) }
         updateView()
     }
     

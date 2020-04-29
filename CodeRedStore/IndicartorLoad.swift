@@ -8,13 +8,13 @@
 
 import UIKit
 
-// Позже завязать на протокол
-protocol IndicatorLoadProtocol: class {
-    func showIndicator(view: UIView, indicator: UIActivityIndicatorView)
-    func hideIndicator(view: UIView, indicator: UIActivityIndicatorView)
-}
-
-class IndicatorLoad: UIView, IndicatorLoadProtocol {
+class IndicatorLoad: UIView {
+    
+    var myActivityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
+        activityIndicator.hidesWhenStopped = true
+        return activityIndicator
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -24,32 +24,32 @@ class IndicatorLoad: UIView, IndicatorLoadProtocol {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func showIndicator(view: UIView, indicator: UIActivityIndicatorView) {
+    func showIndicator(view: UIView) {
         self.frame = view.frame
         self.center = view.center
         self.backgroundColor = .white
         
         let loadingView = UIView()
         loadingView.frame = CGRect(x: 0, y: 0, width: 80, height: 80)
-        loadingView.center = view.center
+        loadingView.center = CGPoint(x: view.frame.width / 2, y: view.frame.height / 2 - 40.0)
         loadingView.backgroundColor = .lightGray
         loadingView.clipsToBounds = true
         loadingView.layer.cornerRadius = 10
-        
-        indicator.center = view.center
-        indicator.frame = CGRect(x: 0.0, y: 0.0, width: 40.0, height: 40.0)
-        indicator.style = .whiteLarge
-        indicator.center = CGPoint(x: loadingView.frame.width / 2, y: loadingView.frame.height / 2)
+        //
+        myActivityIndicator.center = view.center
+        myActivityIndicator.frame = CGRect(x: 0.0, y: 0.0, width: 40.0, height: 40.0)
+        myActivityIndicator.style = .whiteLarge
+        myActivityIndicator.center = CGPoint(x: loadingView.frame.width / 2, y: loadingView.frame.height / 2)
         self.addSubview(loadingView)
-        loadingView.addSubview(indicator)
+        loadingView.addSubview(myActivityIndicator)
         view.addSubview(self)
-        indicator.startAnimating()
+        myActivityIndicator.startAnimating()
     }
     
-    func hideIndicator(view: UIView, indicator: UIActivityIndicatorView) {
+    func hideIndicator(view: UIView) {
         self.removeFromSuperview()
-        indicator.stopAnimating()
-        indicator.removeFromSuperview()
+        myActivityIndicator.stopAnimating()
+        myActivityIndicator.removeFromSuperview()
     }
     
     deinit {
