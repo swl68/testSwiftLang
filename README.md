@@ -1,6 +1,6 @@
 
 # CodeRedStore
-Для взаимодествия с сайтом сделал небольшую API с помощью сервиса wrapapi.com, который преобразует нужные данные из HTML в JSON.
+
 <h2>Главный экран</h2>
 
 <img width=400 height=800 img alt="" src="https://github.com/swl68/cr/blob/master/startScreen.jpg?raw=true">
